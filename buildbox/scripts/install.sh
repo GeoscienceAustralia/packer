@@ -20,3 +20,6 @@ unzip packer_0.12.1_linux_amd64.zip
 sudo mv packer /usr/local/bin/packer
 # Ruby
 sudo gem install bundler
+
+# reboot
+sudo init 6

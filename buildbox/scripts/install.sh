@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo apt-get update
+sudo apt-get dist-upgrade
 sudo apt-get install -y --force-yes python3-pip wget curl git patch gcc pylint unzip docker.io
 sudo pip3 install awscli troposphere boto3 hiera-py nose coverage iptools requests bumpversion inflection pyyaml cerberus gitpython jinja2
 

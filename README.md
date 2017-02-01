@@ -3,7 +3,8 @@
 Packer examples to be referenced at cloud.ga.gov.au.
 
 ## Contents
-* **simple-webserver** 
+* **simple-webserver**
+* **buildbox**
 
 ## Install
 Download and install [Packer](https://www.packer.io/downloads.html)

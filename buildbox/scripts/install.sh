@@ -2,7 +2,8 @@
 
 sudo apt-get update
 sudo apt-get dist-upgrade
-sudo apt-get install -y --force-yes python3-pip wget curl git patch gcc pylint unzip docker.io
+sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get install -y --force-yes python3-pip wget curl git patch gcc pylint unzip docker.io software-properties-common ruby2.3 ruby2.3-dev
 sudo pip3 install awscli troposphere boto3 hiera-py nose coverage iptools requests bumpversion inflection pyyaml cerberus gitpython jinja2
 
 # Terraform
@@ -17,4 +18,5 @@ sudo chmod +x /usr/local/bin/terragrunt
 wget https://releases.hashicorp.com/packer/0.12.1/packer_0.12.1_linux_amd64.zip
 unzip packer_0.12.1_linux_amd64.zip
 sudo mv packer /usr/local/bin/packer
-
+# Ruby
+sudo gem install bundler

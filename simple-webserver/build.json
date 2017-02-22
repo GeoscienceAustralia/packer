@@ -28,6 +28,15 @@
     {
       "type": "shell",
       "script": "scripts/post-install.sh"
+    },
+    {
+      "type": "file",
+      "source": "tests",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/runtests.sh"
     }
   ]
 }

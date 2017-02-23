@@ -15,9 +15,9 @@ env:
 install:
 - mkdir -p "$TRAVIS_BUILD_DIR/bin"
 - mkdir -p "$TRAVIS_BUILD_DIR/tmp"
-- sudo apt-get update
-- sudo install python3-pip
-- sudo pip3 install boto3
+- apt-get update
+- apt-get install python3-pip
+- pip3 install boto3
 - if ! packer version ; then
     pushd "$TMPDIR" ;
     curl -sSL

@@ -1,5 +1,6 @@
 language: bash
 sudo: required
+dist: trusty
 env:
   global:
   - AWS_DEFAULT_REGION=ap-southeast-2
@@ -14,10 +15,9 @@ env:
 install:
 - mkdir -p "$TRAVIS_BUILD_DIR/bin"
 - mkdir -p "$TRAVIS_BUILD_DIR/tmp"
-- sudo apt-get install python3-setuptools
-- sudo easy_install3 pip
-- sudo mv /usr/local/bin/pip /usr/local/bin/pip3
-- pip3 install boto3
+- sudo apt-get update
+- sudo install python3-pip
+- sudo pip3 install boto3
 - if ! packer version ; then
     pushd "$TMPDIR" ;
     curl -sSL

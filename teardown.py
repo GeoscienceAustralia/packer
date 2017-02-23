@@ -11,10 +11,13 @@ filters = [
 ]
 
 images = client.describe_images(Filters=filters)
-
-# Deregister all 'ecat' images marked as 'previous'
-for image in images['Images']:
-  print('Deregistering: ' + image['ImageId'])
-  client.deregister_image(
-    ImageId = image['ImageId']
-  )
+if not images['Images']:
+    print('Error: Image not found')
+    exit(1)
+else:
+    # Deregister all 'ecat' images marked as 'previous'
+    for image in images['Images']:
+        print('Deregistering: ' + image['ImageId'])
+        client.deregister_image(
+            ImageId = image['ImageId']
+        )

@@ -14,8 +14,8 @@
       "associate_public_ip_address": true,
       "iam_instance_profile": "codedeploy-test",
       "tags": {
-        "application": "ecat",
-        "version": "current"
+        "application": "codedeploy",
+        "version": "test"
       }
     }
   ],

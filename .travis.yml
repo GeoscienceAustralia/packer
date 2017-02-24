@@ -34,4 +34,5 @@ script:
 - packer validate build.json
 - packer build build.json
 - popd
+- sleep 20
 - python3 teardown.py $TEST_SUITE

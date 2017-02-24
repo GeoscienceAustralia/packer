@@ -11,7 +11,11 @@
       "instance_type": "t2.medium",
       "ssh_username": "ubuntu",
       "ami_name": "Packer Simple Webserver {{timestamp}}",
-      "associate_public_ip_address": true
+      "associate_public_ip_address": true,
+      "tags": {
+        "application": "simple-webserver",
+        "version": "test"
+      }
     }
   ],
 
@@ -28,6 +32,15 @@
     {
       "type": "shell",
       "script": "scripts/post-install.sh"
+    },
+    {
+      "type": "file",
+      "source": "tests",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/runtests.sh"
     }
   ]
 }

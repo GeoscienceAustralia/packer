@@ -1,7 +1,9 @@
 {
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+    "home_ip_ssh": "{{env `HOME_IP_SSH`}}",
+    "home_ip_html": "{{env `HOME_IP_HTML`}}"
   },  
   "builders": [
     {
@@ -26,12 +28,16 @@
     },
     {
       "type": "file",
-      "source": "files/index.html",
-      "destination": "/tmp/index.html"
+      "source": "files",
+      "destination": "/tmp"
     },
     {
       "type": "shell",
-      "script": "scripts/post-install.sh"
+      "script": "scripts/post-install.sh",
+      "environment_vars": [
+        "HOME_IP_SSH={{user `home_ip_ssh`}}",
+        "HOME_IP_HTML={{user `home_ip_html`}}"
+      ]
     },
     {
       "type": "file",
@@ -41,6 +47,10 @@
     {
       "type": "shell",
       "script": "scripts/runtests.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/restart.sh"
     }
   ]
 }

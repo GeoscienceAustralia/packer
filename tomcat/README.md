@@ -24,7 +24,7 @@
 2. `export HOME_IP_SSH=yoursship`
 3. `packer build build.json`
 
-## Customisations from default apache
+## Customisations from default tomcat
 
 ### Network
 * Configure a software firewall

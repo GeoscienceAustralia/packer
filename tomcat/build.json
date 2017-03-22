@@ -1,0 +1,56 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+    "home_ip_ssh": "{{env `HOME_IP_SSH`}}",
+    "home_ip_html": "{{env `HOME_IP_HTML`}}"
+  },  
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "ap-southeast-2",
+      "source_ami": "ami-4d3b062e",
+      "instance_type": "t2.medium",
+      "ssh_username": "ubuntu",
+      "ami_name": "Packer Tomcat {{timestamp}}",
+      "associate_public_ip_address": true,
+      "tags": {
+        "application": "tomcat",
+        "version": "test"
+      }
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/pre-install.sh"
+    },
+    {
+      "type": "file",
+      "source": "files",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/post-install.sh",
+      "environment_vars": [
+        "HOME_IP_SSH={{user `home_ip_ssh`}}",
+        "HOME_IP_HTML={{user `home_ip_html`}}"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "tests",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/runtests.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/restart.sh"
+    }
+  ]
+}

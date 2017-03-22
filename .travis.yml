@@ -11,6 +11,7 @@ env:
   - TEST_SUITE=buildbox
   - TEST_SUITE=codedeploy
   - TEST_SUITE=simple-webserver
+  - TEST_SUITE=tomcat
 
 install:
 - mkdir -p "$TRAVIS_BUILD_DIR/bin"

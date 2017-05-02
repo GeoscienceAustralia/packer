@@ -4,8 +4,8 @@ sudo apt-get update
 sudo apt-get dist-upgrade
 
 # Install apache
-sudo apt-get install -y apache2
-sudo apt-get install -y apache2-utils
+sudo apt-get install -y default-jdk
+sudo apt-get install -y tomcat8
 
 # Install firewall
 sudo apt-get install -y ufw

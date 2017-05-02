@@ -24,7 +24,10 @@ echo ===========================================================================
 sudo ufw allow ssh
 
 ## Enable HTTP
-sudo ufw allow Apache
+sudo ufw allow 8080
+
+## Specifically disable tomcat shutdown port
+sudo ufw deny 8005
 
 ## Turn it on
 sudo ufw --force enable
@@ -53,25 +56,36 @@ echo ===========================================================================
 sudo echo "nospoof on" | sudo tee --append /etc/host.conf
 
 echo ==============================================================================
-echo Configure Apache #
+echo Configure Tomcat #
 echo ==============================================================================
 
-# add mod headers so we can disable ETags
-pushd /etc/apache2/mods-enabled
-sudo ln -s ../mods-available/headers.load headers.load
+# Remove default apps
+sudo rm -rf /var/lib/tomcat8/webapps/*
+# Remove version number from catalina
+pushd /usr/share/tomcat8/lib
+sudo jar xf catalina.jar org/apache/catalina/util/ServerInfo.properties
+sudo sed -ie 's/server.info=Apache Tomcat.*$/server.info=Apache Tomcat/' \
+org/apache/catalina/util/ServerInfo.properties
+sudo jar uf catalina.jar org/apache/catalina/util/ServerInfo.properties
+sudo rm -rf org
 popd
-# Configure Apache to not tell everyone what it is
-sudo mv -f /tmp/files/security.conf /etc/apache2/conf-available/
-# Add a default site
-sudo mv /tmp/files/index.html /var/www/html/index.html
-sudo service apache2 restart
+
+# Create a default app
+sudo mv /tmp/files/ROOT.war /var/lib/tomcat8/webapps/
+
+# Set the error page
+sudo sed -i 's/<\/web-app>//' /etc/tomcat8/web.xml
+cat /tmp/files/web.xml | sudo tee --append /etc/tomcat8/web.xml
+echo \n
 
 echo ==============================================================================
 echo Configure fail2ban
 echo ==============================================================================
 
 # Fail2Ban will scrape logs and look for things that are suspicious and ban 
-# those IPs for 10 minutes, we want to set it up for apache, and ignore our IPs
+# those IPs for 10 minutes, we want to set it up for sshd, and ignore our IPs
+
+# Fail2Ban doesn't have any default tomcat config
 
 sudo echo "[DEFAULT]" >> /tmp/files/f2b-ga.conf
 sudo echo "ignoreip = 127.0.0.1/8 ${HOME_IP_SSH} ${HOME_IP_HTML}" \

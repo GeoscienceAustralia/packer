@@ -12,10 +12,10 @@
       "source_ami": "ami-4d3b062e",
       "instance_type": "t2.medium",
       "ssh_username": "ubuntu",
-      "ami_name": "Packer Simple Webserver {{timestamp}}",
+      "ami_name": "Packer Tomcat {{timestamp}}",
       "associate_public_ip_address": true,
       "tags": {
-        "application": "simple-webserver",
+        "application": "tomcat",
         "version": "test"
       }
     }

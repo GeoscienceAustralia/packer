@@ -7,6 +7,7 @@ Packer examples to be referenced at [cloud.ga.gov.au](cloud.ga.gov.au)
 * **buildbox**
 * **codedeploy**
 * **simple-webserver**
+* **tomcat**
 
 ## Install
 Download and install [Packer](https://www.packer.io/downloads.html)
